@@ -5,7 +5,7 @@
   "main": "dist/lib/index",
   "types": "dist/lib/index",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test jest --config=jest.config.js --runInBand",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js"
   },
@@ -21,11 +21,17 @@
   },
   "homepage": "https://github.com/HermesWu/theone-react#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.5.4",
+    "@babel/preset-react": "^7.0.0",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
     "awesome-typescript-loader": "^5.2.1",
+    "babel-jest": "^24.8.0",
     "cross-env": "^5.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.8.0",
+    "react-test-renderer": "^16.8.6",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.5.3",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.5",
