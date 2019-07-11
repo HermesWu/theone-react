@@ -5,7 +5,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist/lib'),
-    libraty: 'theRone',
+    library: 'theRone',
     libraryTarget: 'umd'
   },
   module: {
