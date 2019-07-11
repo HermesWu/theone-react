@@ -19,6 +19,7 @@
   "homepage": "https://github.com/HermesWu/theone-react#readme",
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
+    "typescript": "^3.5.3",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.5"
   }
