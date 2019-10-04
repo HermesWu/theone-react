@@ -1,16 +1,18 @@
+import * as React from 'react';
+import wechat from './Icons/we_chat.svg';
 
-import * as React from 'react'
+console.log(wechat)
 
-interface IconProps{
+interface IconProps {
     name: string
 }
 
-const icon:React.FunctionComponent<IconProps> = (props) => {
+const icon: React.FunctionComponent<IconProps> = (props) => {
     return (
         <div>
             icon
         </div>
-    )
-}
+    );
+};
 
-export default icon
+export default icon;
