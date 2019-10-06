@@ -3,7 +3,7 @@ import './importIcons';
 import './icon.scss'
 
 
-interface IconProps {
+interface IconProps extends React.SVGAttributes<SVGElement> {
     name: string
 }
 
