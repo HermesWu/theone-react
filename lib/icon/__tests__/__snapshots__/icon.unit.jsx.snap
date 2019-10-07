@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icon render successfully 1`] = `
+<svg
+  className="theonen-icon"
+>
+  <use
+    xlinkHref="#wechat"
+  />
+</svg>
+`;
