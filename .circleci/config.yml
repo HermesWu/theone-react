@@ -50,11 +50,8 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run:
-          name: Publish to NPM
-          command: |
-            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-            npm publish
+      - run: npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+      - run: npm publish
 
 
 
