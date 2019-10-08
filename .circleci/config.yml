@@ -49,7 +49,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+      - run: npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
       - run: npm publish
 
 
@@ -70,6 +70,6 @@ workflows:
             - test
           filters:
             tags:
-              only: /v[0-9]+(\.[0-9]+)*/
+              only: /^v[0-9]+(\.[0-9]+)*/
             branches:
               ignore: /.*/
