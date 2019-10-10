@@ -1,24 +1,27 @@
-import * as React from 'react';
-import {ReactElement} from 'react';
-import './dialog.scss'
+import React, {Fragment, ReactElement} from 'react';
+import './dialog.scss';
 import {scopedClassMaker} from '../helps/classes';
 import {Icon} from '../index';
 
 interface Props {
   visible: boolean,
-  buttons?: Array<ReactElement>
+  buttons?: Array<ReactElement>,
+  onClose: React.MouseEventHandler
 }
 
-const scopedClass = scopedClassMaker('theone-dialog')
-const sc = scopedClass
+const scopedClass = scopedClassMaker('theone-dialog');
+const sc = scopedClass;
 
 const Dialog: React.FunctionComponent<Props> = (props) => {
+  const onClickClose:React.MouseEventHandler = (e) => {
+    props.onClose(e)
+  }
   return (
     props.visible ?
-      <div>
+      <Fragment>
         <div className={sc('mask')}/>
         <div className={sc('')}>
-          <div className={sc("close")}>
+          <div className={sc('close')} onClick={onClickClose}>
             <Icon name="close"></Icon>
           </div>
           <header className={sc('header')}>
@@ -31,7 +34,7 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
             {props.buttons}
           </footer>
         </div>
-      </div> :
+      </Fragment> :
       null
   );
 };
