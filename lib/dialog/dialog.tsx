@@ -13,9 +13,9 @@ const scopedClass = scopedClassMaker('theone-dialog');
 const sc = scopedClass;
 
 const Dialog: React.FunctionComponent<Props> = (props) => {
-  const onClickClose:React.MouseEventHandler = (e) => {
-    props.onClose(e)
-  }
+  const onClickClose: React.MouseEventHandler = (e) => {
+    props.onClose(e);
+  };
   return (
     props.visible ?
       <Fragment>
@@ -31,7 +31,9 @@ const Dialog: React.FunctionComponent<Props> = (props) => {
             <div>{props.children}</div>
           </main>
           <footer className={sc('footer')}>
-            {props.buttons}
+            {props.buttons && props.buttons.map((button, index) =>
+              React.cloneElement(button, {key: index})
+            )}
           </footer>
         </div>
       </Fragment> :
