@@ -7,7 +7,8 @@ const DialogExample: React.FunctionComponent = () => {
   const [y, setY] = useState(false);
   return (
     <Fragment>
-      <div>
+      <div style={{position: 'relative', zIndex: 10, border: '1px solid red', color:'red'}}>
+        <h1>Example 1</h1>
         <button onClick={() => {setX(!x);}}>click</button>
         <Dialog visible={x} buttons={
           [
@@ -19,7 +20,8 @@ const DialogExample: React.FunctionComponent = () => {
           <div>hi</div>
         </Dialog>
       </div>
-      <div>
+      <div style={{position: 'relative', zIndex:9}}>
+        <h1>Example 2</h1>
         <button onClick={() => {setY(!y);}}>click</button>
         <Dialog visible={y} closeOnClickMask={true} buttons={
           [
