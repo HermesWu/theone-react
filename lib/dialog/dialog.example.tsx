@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from 'react';
-import Dialog from './dialog';
+import Dialog, {alert} from './dialog';
 
 
 const DialogExample: React.FunctionComponent = () => {
@@ -7,6 +7,10 @@ const DialogExample: React.FunctionComponent = () => {
   const [y, setY] = useState(false);
   return (
     <Fragment>
+      <div>
+        <h1>Example 3</h1>
+        <button onClick={()=>alert('1')}>alert</button>
+      </div>
       <div style={{position: 'relative', zIndex: 10, border: '1px solid red', color:'red'}}>
         <h1>Example 1</h1>
         <button onClick={() => {setX(!x);}}>click</button>
