@@ -15,7 +15,7 @@ const DialogExample: React.FunctionComponent = () => {
         <button onClick={() => confirm('1', () => {console.log('你点击了yes');}, () => {console.log('你点击了no')})}>
           confirm
         </button>
-        <button onClick={openModal}>confirm</button>
+        <button onClick={openModal}>modal</button>
       </div>
       <div>
         <h1>Example 3</h1>
