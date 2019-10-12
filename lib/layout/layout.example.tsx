@@ -1,64 +1,55 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import Layout from './layout';
 import Header from './header';
 import Content from './content';
 import Footer from './footer';
 import Aside from './aside';
+import './layout.example.scss'
 
-const LayoutExample: React.FunctionComponent = () => {
+export default function () {
   return (
-    <Fragment>
+    <div>
       <div>
-        <h1>布局一</h1>
-        <Layout style={{height: '500px'}}>
-          <Header>header</Header>
-          <Content>content</Content>
-          <Footer>footer</Footer>
+        <h1>第一个例子</h1>
+        <Layout style={{height: 500, width: 500}} className="hi">
+          <Header className="x">header</Header>
+          <Content className="y">content</Content>
+          <Footer className="x">footer</Footer>
         </Layout>
       </div>
       <div>
-        <h1>布局二</h1>
-        <Layout style={{height: '500px'}}>
-          <Header>header</Header>
+        <h1>第二个例子</h1>
+        <Layout style={{height: 500, width: 500}} className="hi">
+          <Header className="x">header</Header>
           <Layout>
-            <Aside>aside</Aside>
-            <Content>
-              content
-            </Content>
+            <Aside className="z" style={{width: '80px'}}>aside</Aside>
+            <Content className="y">content</Content>
           </Layout>
-          <Footer>footer</Footer>
+          <Footer className="x">footer</Footer>
         </Layout>
       </div>
       <div>
-        <h1>布局三</h1>
-        <Layout style={{height: '500px'}}>
-          <Header>header</Header>
+        <h1>第三个例子</h1>
+        <Layout style={{height: 500, width: 500}} className="hi">
+          <Header className="x">header</Header>
           <Layout>
-            <Content>
-              content
-            </Content>
-            <Aside>aside</Aside>
+            <Content className="y">content</Content>
+            <Aside className="z">aside</Aside>
           </Layout>
-          <Footer>footer</Footer>
+          <Footer className="x">footer</Footer>
         </Layout>
       </div>
       <div>
-        <h1>布局四</h1>
-        <Layout style={{height: '500px'}}>
-          <Aside>aside</Aside>
+        <h1>第四个例子</h1>
+        <Layout style={{height: 500, width: 500}} className="hi">
+          <Aside className="z">aside</Aside>
           <Layout>
-            <Header>header</Header>
-            <Content>
-              content
-            </Content>
-            <Footer>footer</Footer>
+            <Header className="x">header</Header>
+            <Content className="y">content</Content>
+            <Footer className="x">footer</Footer>
           </Layout>
-
         </Layout>
       </div>
-    </Fragment>
-
+    </div>
   );
-};
-
-export default LayoutExample;
+}
