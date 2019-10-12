@@ -13,11 +13,11 @@ const Layout: React.FunctionComponent<Props> = (props) => {
   const {className, ...restProps} = props;
 
   const children = props.children as Array<ReactElement>;
-  const hasAside = children.length &&
+  const hasAside = children.length > 0 &&
     children.reduce((result, node) => result || node.type === Aside, false);
 
   return (
-    <div className={sc('', {extra: [className, hasAside && 'hasAside'].join(' ')})} {...restProps}>
+    <div className={sc({'': true, hasAside}, {extra: className})} {...restProps}>
       {props.children}
     </div>
   );
