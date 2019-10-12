@@ -1,24 +1,20 @@
 import React, {ReactElement} from 'react';
 import {scopedClassMaker} from '../helps/classes';
-import './layout.scss'
+import './layout.scss';
 import Aside from './aside';
 
-interface Props extends React.HTMLAttributes<HTMLElement>{
+interface Props extends React.HTMLAttributes<HTMLElement> {
   children: ReactElement | Array<ReactElement>
 }
-const sc = scopedClassMaker('theone-layout')
+
+const sc = scopedClassMaker('theone-layout');
 
 const Layout: React.FunctionComponent<Props> = (props) => {
-  const {className, ...restProps} = props
+  const {className, ...restProps} = props;
 
-  let hasAside = false
-
-  console.log(props.children);
-  (props.children as Array<ReactElement>).map(node => {
-    if(node.type === Aside){
-      hasAside = true
-    }
-  })
+  const children = props.children as Array<ReactElement>;
+  const hasAside = children.length &&
+    children.reduce((result, node) => result || node.type === Aside, false);
 
   return (
     <div className={sc('', {extra: [className, hasAside && 'hasAside'].join(' ')})} {...restProps}>
