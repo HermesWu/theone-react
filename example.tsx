@@ -6,7 +6,7 @@ import ButtonExample from './lib/button.example';
 import LayoutExample from './lib/layout/layout.example';
 import {Layout, Aside, Header, Content, Footer} from './lib/layout/layout';
 import './example.scss';
-import IconDemo from './lib/icon/icon.example';
+import IconDemo from './lib/icon/icon.demo';
 
 
 const logo = require('./logo.png');
