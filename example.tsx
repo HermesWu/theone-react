@@ -1,47 +1,50 @@
-import * as React from 'react';
-import * as ReactDom from 'react-dom';
-import {HashRouter as Router, Route, Link} from 'react-router-dom';
-import IconExample from './lib/icon/icon.example';
-import ButtonExample from './lib/button.example';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {HashRouter as Router, Route, NavLink} from 'react-router-dom';
 import DialogExample from './lib/dialog/dialog.example';
+import ButtonExample from './lib/button.example';
 import LayoutExample from './lib/layout/layout.example';
-import {Layout, Header, Aside, Content, Footer} from './lib/layout/layout';
-import './example.scss'
+import {Layout, Aside, Header, Content, Footer} from './lib/layout/layout';
+import './example.scss';
+import IconDemo from './lib/icon/icon.example';
 
-ReactDom.render(
+
+const logo = require('./logo.png');
+
+ReactDOM.render(
   <Router>
-    <Layout>
-      <Header>
-        <div className="logo">The-One</div>
+    <Layout className="site-page">
+      <Header className="site-header">
+        <div className="logo">
+          <img src={logo} width="48" height="48" alt=""/>
+          <span> THeOne </span>
+        </div>
       </Header>
       <Layout>
-        <Aside>
+        <Aside className="site-aside">
           <h2>组件</h2>
           <ul>
             <li>
-              <Link to="/icon">Icon</Link>
+              <NavLink to="/icon">Icon</NavLink>
             </li>
             <li>
-              <Link to="/button">Button</Link>
+              <NavLink to="/dialog">对话框</NavLink>
             </li>
             <li>
-              <Link to="/dialog">对话框</Link>
-            </li>
-            <li>
-              <Link to="/layout">Layout</Link>
+              <NavLink to="/layout">布局</NavLink>
             </li>
           </ul>
         </Aside>
-        <Content>
-          <Route path="/icon" component={IconExample}/>
+        <Content className="site-main">
+          <Route path="/icon" component={IconDemo}/>
           <Route path="/button" component={ButtonExample}/>
           <Route path="/dialog" component={DialogExample}/>
-          <Route path="/layout" component={LayoutExample}></Route>
+          <Route path="/layout" component={LayoutExample}/>
         </Content>
       </Layout>
-      <Footer>
-        footer
+      <Footer className="site-footer">
+        &copy; DanielWu
       </Footer>
     </Layout>
-  </Router>,
-  document.querySelector('#root'));
+  </Router>
+  , document.querySelector('#root'));
