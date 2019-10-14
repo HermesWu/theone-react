@@ -10,17 +10,6 @@ const DialogExample: React.FunctionComponent = () => {
   }
   return (
     <Fragment>
-      <div>
-        <h1>Example 4</h1>
-        <button onClick={() => confirm('1', () => {console.log('你点击了yes');}, () => {console.log('你点击了no')})}>
-          confirm
-        </button>
-        <button onClick={openModal}>modal</button>
-      </div>
-      <div>
-        <h1>Example 3</h1>
-        <button onClick={() => alert('1')}>alert</button>
-      </div>
       <div style={{position: 'relative', zIndex: 10, border: '1px solid red', color: 'red'}}>
         <h1>Example 1</h1>
         <button onClick={() => {setX(!x);}}>click</button>
@@ -46,6 +35,17 @@ const DialogExample: React.FunctionComponent = () => {
         >
           <div>hi</div>
         </Dialog>
+      </div>
+      <div>
+        <h1>Example 3</h1>
+        <button onClick={() => alert('1')}>alert</button>
+      </div>
+      <div>
+        <h1>Example 4</h1>
+        <button onClick={() => confirm('1', () => {console.log('你点击了yes');}, () => {console.log('你点击了no')})}>
+          confirm
+        </button>
+        <button onClick={openModal}>modal</button>
       </div>
     </Fragment>
 
