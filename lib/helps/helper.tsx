@@ -1,1 +1,0 @@
-const isTrue = (value: any) => value
