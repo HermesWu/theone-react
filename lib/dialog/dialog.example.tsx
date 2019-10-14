@@ -11,7 +11,7 @@ const DialogExample: React.FunctionComponent = () => {
   return (
     <Fragment>
       <div style={{position: 'relative', zIndex: 10, border: '1px solid red', color: 'red'}}>
-        <h1>Example 1</h1>
+        <h1>示例一 </h1>
         <button onClick={() => {setX(!x);}}>click</button>
         <Dialog visible={x} buttons={
           [
@@ -24,7 +24,7 @@ const DialogExample: React.FunctionComponent = () => {
         </Dialog>
       </div>
       <div style={{position: 'relative', zIndex: 9}}>
-        <h1>Example 2</h1>
+        <h1>示例二</h1>
         <button onClick={() => {setY(!y);}}>click</button>
         <Dialog visible={y} closeOnClickMask={true} buttons={
           [
@@ -37,11 +37,11 @@ const DialogExample: React.FunctionComponent = () => {
         </Dialog>
       </div>
       <div>
-        <h1>Example 3</h1>
+        <h1>示例三</h1>
         <button onClick={() => alert('1')}>alert</button>
       </div>
       <div>
-        <h1>Example 4</h1>
+        <h1>示例四</h1>
         <button onClick={() => confirm('1', () => {console.log('你点击了yes');}, () => {console.log('你点击了no')})}>
           confirm
         </button>
