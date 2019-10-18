@@ -1,7 +1,7 @@
 import React, {ReactFragment} from 'react';
 
-interface FormValue{
-  [k:string]: any
+export interface FormValue {
+  [k: string]: any
 }
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   fields: Array<{ name: string, label: string, input: { type: string } }>
   buttons: ReactFragment
   onSubmit: React.FormEventHandler
-  onChange: FormValue
+  onChange: (value: FormValue) => void
 }
 
 const Form: React.FunctionComponent<Props> = (props) => {
@@ -18,9 +18,9 @@ const Form: React.FunctionComponent<Props> = (props) => {
     e.preventDefault();
     props.onSubmit(e);
   };
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-
+  const onInputChange = (name: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = {...formData, [name]: e.target.value};
+    props.onChange(newValue);
   };
   return (
     <form onSubmit={onSubmit}>
@@ -30,7 +30,7 @@ const Form: React.FunctionComponent<Props> = (props) => {
           <input
             type={f.input.type}
             value={formData[f.name]}
-            onChange={onInputChange}
+            onChange={onInputChange.bind(null, f.name)}
           />
         </div>
       )}

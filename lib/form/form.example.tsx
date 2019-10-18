@@ -1,8 +1,8 @@
-import Form from './form';
+import Form, {FormValue} from './form';
 import React, { useState, Fragment } from 'react';
 
 const FormExample: React.FunctionComponent = () => {
-  const [formData] = useState({
+  const [formData, setFormData] = useState<FormValue>({
     username: 'test',
     password: ''
   })
@@ -18,6 +18,7 @@ const FormExample: React.FunctionComponent = () => {
       value={formData}
       fields={fields}
       onSubmit={onSubmit}
+      onChange={(newValue) => setFormData(newValue)}
       buttons={
       <Fragment>
         <button type={'submit'}>提交</button>
