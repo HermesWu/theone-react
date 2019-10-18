@@ -7,6 +7,7 @@ import LayoutExample from './lib/layout/layout.example';
 import {Layout, Aside, Header, Content, Footer} from './lib/layout/layout';
 import './example.scss';
 import IconDemo from './lib/icon/icon.demo';
+import FormExample from './lib/form/form.example';
 
 
 const logo = require('./logo.png');
@@ -25,13 +26,16 @@ ReactDOM.render(
           <h2>组件</h2>
           <ul>
             <li>
-              <NavLink to="/icon">Icon</NavLink>
+              <NavLink to="/icon">Icon 图标</NavLink>
             </li>
             <li>
-              <NavLink to="/dialog">对话框</NavLink>
+              <NavLink to="/dialog">dialog 对话框</NavLink>
             </li>
             <li>
-              <NavLink to="/layout">布局</NavLink>
+              <NavLink to="/layout">layout 布局</NavLink>
+            </li>
+            <li>
+              <NavLink to={"/form"}>form 表单</NavLink>
             </li>
           </ul>
         </Aside>
@@ -40,6 +44,7 @@ ReactDOM.render(
           <Route path="/button" component={ButtonExample}/>
           <Route path="/dialog" component={DialogExample}/>
           <Route path="/layout" component={LayoutExample}/>
+          <Route path="/form" component={FormExample}/>
         </Content>
       </Layout>
       <Footer className="site-footer">
