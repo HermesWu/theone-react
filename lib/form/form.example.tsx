@@ -13,7 +13,11 @@ const FormExample: React.FunctionComponent = () => {
   ])
   const onSubmit: React.FormEventHandler<HTMLInputElement> = (e) =>{
     const rules = [
-      {key: 'username', required: true}
+      {key: 'username', required: true},
+      {key: 'username', minLength: 6, maxLength: 12},
+      {key: 'username', pattern: /^[A-Za-z0-9]+$/},
+      {key: 'password', required: true},
+      {key: 'password', pattern: /^[A-Za-z0-9]+$/},
     ]
     const errors = validator(formData, rules)
     console.log('errors',errors);
