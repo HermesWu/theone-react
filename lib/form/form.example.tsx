@@ -1,6 +1,7 @@
 import Form, {FormValue} from './form';
 import React, { useState, Fragment } from 'react';
 import validator from './validator';
+import Button from '../button/button';
 
 export function noError(errors: any) {
   return Object.keys(errors).length === 0;
@@ -42,8 +43,8 @@ const FormExample: React.FunctionComponent = () => {
       errors={errors}
       buttons={
       <Fragment>
-        <button type={'submit'}>提交</button>
-        <button >返回</button>
+        <Button level='important' type={'submit'}>提交</Button>
+        <Button >返回</Button>
       </Fragment>
       }
     />
