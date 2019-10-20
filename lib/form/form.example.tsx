@@ -2,11 +2,16 @@ import Form, {FormValue} from './form';
 import React, { useState, Fragment } from 'react';
 import validator from './validator';
 
+export function noError(errors: any) {
+  return Object.keys(errors).length === 0;
+}
+
 const FormExample: React.FunctionComponent = () => {
   const [formData, setFormData] = useState<FormValue>({
     username: 'test',
     password: ''
   })
+  const [errors, setErrors] = useState({})
   const [fields] = useState([
     {name:'username', label:'用户名', input:{type: 'text'}},
     {name: 'password', label: '密码', input:{type: 'password'}}
@@ -20,7 +25,13 @@ const FormExample: React.FunctionComponent = () => {
       {key: 'password', pattern: /^[A-Za-z0-9]+$/},
     ]
     const errors = validator(formData, rules)
-    console.log('errors',errors);
+    setErrors(errors)
+    if(noError(errors)){
+      // TODO somethings
+    }else{
+      // Errors
+      console.log('errors',errors);
+    }
   }
   return (
     <Form
@@ -28,6 +39,7 @@ const FormExample: React.FunctionComponent = () => {
       fields={fields}
       onSubmit={onSubmit}
       onChange={(newValue) => setFormData(newValue)}
+      errors={errors}
       buttons={
       <Fragment>
         <button type={'submit'}>提交</button>
