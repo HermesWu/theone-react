@@ -13,7 +13,8 @@ interface Props {
   buttons: ReactFragment
   onSubmit: React.FormEventHandler
   onChange: (value: FormValue) => void
-  errors: { [k: string]: string[] }
+  errors: { [k: string]: string[] },
+  errorsDisplayMode?: 'first' | 'all'
 }
 
 const sc = scopedClassMaker('theone-form');
@@ -43,7 +44,14 @@ const Form: React.FunctionComponent<Props> = (props) => {
                 value={formData[f.name]}
                 onChange={onInputChange.bind(null, f.name)}
               />
-              <div>{props.errors[f.name]}</div>
+              <div className={sc('error')}>{
+                props.errors[f.name] ?
+                  (props.errorsDisplayMode === 'first'?
+                      props.errors[f.name][0]:
+                      props.errors[f.name].join('')
+                  ):
+                  <span style={{userSelect:'none'}}>&nbsp;</span>
+              }</div>
             </td>
           </tr>
         )}
@@ -60,4 +68,7 @@ const Form: React.FunctionComponent<Props> = (props) => {
     </form>
   );
 };
+Form.defaultProps = {
+  errorsDisplayMode: 'first'
+}
 export default Form;
