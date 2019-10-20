@@ -16,4 +16,9 @@
   &-td + &-td {
     padding-left: 16px;
   }
+  &-error{
+    color: red;
+    font-size: .8em;
+    margin-top: 4px;
+  }
 }
