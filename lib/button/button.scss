@@ -1,0 +1,28 @@
+@import '../helper';
+.theone-button{
+  cursor: pointer;
+  line-height: 22px;
+  padding: 4px 16px;
+  transition: all 250ms;
+  &:focus{
+    outline: none;
+  }
+  &-normal{
+    color: #333;
+    border: 1px solid lighten(#333, 50%);
+    background-color: white;
+    &:hover, &:focus{
+      color: $main-color;
+      border-color: $main-color;
+    }
+  }
+  &-important{
+    color: white;
+    border: 1px solid $main-color;
+    background-color: $main-color;
+    &:hover, &:focus{
+      background: lighten($main-color, 10%);
+      border-color: lighten($main-color, 10%);
+    }
+  }
+}
