@@ -6,11 +6,9 @@ interface FormRule {
   minLength?: number
   maxLength?: number
   pattern?: RegExp
+  validator?: (value: string) => Promise<string>
 }
 
-interface FormErrors {
-  [T: string]: string[]
-}
 
 type FormRules = Array<FormRule>
 
@@ -18,9 +16,9 @@ function isEmpty(value: any) {
   return value === undefined || value === null || value === '';
 }
 
-const validator = (formValue: FormValue, rules: FormRules): FormErrors => {
+const validator = (formValue: FormValue, rules: FormRules, callback:(errors: any) => void) => {
   const errors: any = {};
-  const addErrors = (key: string, message: string) => {
+  const addErrors = (key: string, message: string|Promise<any>) => {
     if (errors[key] === undefined) {
       errors[key] = [];
     }
@@ -28,6 +26,10 @@ const validator = (formValue: FormValue, rules: FormRules): FormErrors => {
   };
   rules.map(rule => {
     const value = formValue[rule.key];
+    if(rule.validator){
+      const promise = rule.validator(value)
+      addErrors(rule.key, promise)
+    }
     if (rule.required && isEmpty(value)) {
       addErrors(rule.key, '必填');
     }
@@ -41,7 +43,20 @@ const validator = (formValue: FormValue, rules: FormRules): FormErrors => {
       addErrors(rule.key, '格式不正确')
     }
   });
-  return errors;
+  console.log('errors',errors)
+  Promise.all(flat(Object.values(errors)))
+    .finally(()=>{callback(errors)})
 };
 
 export default validator;
+function flat(array:Array<any>){
+  const result = []
+  for(let i = 0; i < array.length; i++){
+    if(array[i] instanceof Array){
+      result.push(...array[i])
+    }else{
+      result.push(array[i])
+    }
+  }
+  return result
+}
