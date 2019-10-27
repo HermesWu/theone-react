@@ -13,8 +13,9 @@ interface Props {
   buttons: ReactFragment
   onSubmit: React.FormEventHandler
   onChange: (value: FormValue) => void
-  errors: { [k: string]: string[] },
+  errors: { [k: string]: string[] }
   errorsDisplayMode?: 'first' | 'all'
+  transformError?: (message:string) => string
 }
 
 const sc = scopedClassMaker('theone-form');
@@ -29,6 +30,15 @@ const Form: React.FunctionComponent<Props> = (props) => {
     const newValue = {...formData, [name]: e.target.value};
     props.onChange(newValue);
   };
+  const transformError = (message:string)=>{
+    const map:any = {
+      required: '必填',
+      minLength: '长度过短',
+      maxLength: '长度过长',
+      pattern: '格式不正确'
+    }
+    return props.transformError&&props.transformError(message) || map[message] || '未知错误'
+  }
   return (
     <form onSubmit={onSubmit}>
       <table className={sc('table')}>
@@ -47,8 +57,8 @@ const Form: React.FunctionComponent<Props> = (props) => {
               <div className={sc('error')}>{
                 props.errors[f.name] ?
                   (props.errorsDisplayMode === 'first'?
-                      props.errors[f.name][0]:
-                      props.errors[f.name].join('')
+                      transformError(props.errors[f.name][0]):
+                      transformError(props.errors[f.name].join(''))
                   ):
                   <span style={{userSelect:'none'}}>&nbsp;</span>
               }</div>

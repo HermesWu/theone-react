@@ -8,16 +8,16 @@ const checkUserName = (username: string, succeed: () => void, fail: () => void) 
   setTimeout(() => {
     console.log('我知道名字是否已经存在');
     if (usernames.indexOf(username) >= 0) {
-      succeed();
+      fail()
     } else {
-      fail();
+      succeed();;
     }
   }, 2000);
 };
 
 const FormExample: React.FunctionComponent = () => {
   const [formData, setFormData] = useState<FormValue>({
-    username: 'frank',
+    username: 'daniel',
     password: ''
   });
   const [errors, setErrors] = useState({});
@@ -51,6 +51,13 @@ const FormExample: React.FunctionComponent = () => {
 
 
   };
+  const transformError = (message: string) => {
+    const map:any={
+      unique: 'username is taken',
+      required: 'required'
+    }
+    return map[message]
+  }
   return (
     <Form
       value={formData}
@@ -58,6 +65,7 @@ const FormExample: React.FunctionComponent = () => {
       onSubmit={onSubmit}
       onChange={(newValue) => setFormData(newValue)}
       errors={errors}
+      transformError={transformError}
       buttons={
         <Fragment>
           <Button level='important' type={'submit'}>提交</Button>
