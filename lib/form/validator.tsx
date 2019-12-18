@@ -19,7 +19,7 @@ function isEmpty(value: any) {
 }
 
 const validator = (formValue: FormValue, rules: FormRules, callback: (errors: any) => void) => {
-  const errors: any = {};
+  const errors: {[key:string]: OneError[]} = {};
   const addErrors = (key: string, error: OneError) => {
     if (errors[key] === undefined) {
       errors[key] = [];
@@ -45,32 +45,28 @@ const validator = (formValue: FormValue, rules: FormRules, callback: (errors: an
       addErrors(rule.key, 'pattern');
     }
   });
-  console.log('errors');
-  console.log(errors); // {u:[p1,p2],p:[p1,p2]}
-  console.log(Object.keys(errors));
-  const x = Object.keys(errors).map(key =>  // [ [[u,p1],[u,p2]],[[p,p1],[p,p2]] ]
-    // errors[key] = [p1,p2]
-    errors[key].map((promise:Promise<string>) => [key, typeof promise ==='string'?Promise.reject(promise):promise])
+  // [ [[u,p1],[u,p2]],[[p,p1],[p,p2]] ]
+  // errors[key] = [p1,p2]
+
+  const flattenErrors = flat<[string, Promise<string>]>(Object.keys(errors)
+    .map(key => errors[key]
+      .map((promise: Promise<string>) => [key, typeof promise === 'string' ? Promise.reject(promise) : promise])
+    ));
+  // Promise<['u', p1]>
+  // 这个promise 检查用户名，我们需要让这个promise 永远不报错, throw new Error('error')
+  const newPromiseList = flattenErrors.map(([key, errors]) => errors.then<[string,undefined],[string,string]>(() =>
+      [key, undefined]
+    , (reason) =>
+      [key, reason]
+    )
   );
-  console.log('x',x)
-  const y = flat(x)
-  console.log('y',y)
-  const z = y.map(([key,promise])=> promise.then(()=>{
-    // Promise<['u', p1]>
-    // 这个promise 检查用户名，我们需要让这个promise 永远不报错, throw new Error('error')
-    return [key, undefined]
-  },(reason:Promise<string>)=>{
-      return [key, reason]
-    })
-  )
-  console.log('z',z)
-  const h = Promise.all(z).then(result=>{
-    console.log('result')
-    console.log(result)
-    console.log(zip(result.filter(item => item[1])))
-    callback(zip(result.filter(item => item[1])))
-  })
-  console.log('h',h);
+  // 解决any 时，filter 接受泛型 类型守卫
+  function hasError(item: [string, undefined] | [string, string]): item is [string, string]{
+    return typeof item[1] === 'object'
+  }
+  Promise.all(newPromiseList).then(result => {
+    callback(zip(result.filter<[string, string]>(hasError)));
+  });
 
   // const promiseList = flat<OneError>(Object.values(errors)).filter(item => item.promise).map<OneError|OneError[]>(item => item.promise);
   // Promise.all(promiseList)
@@ -106,6 +102,7 @@ function zip(kvList: Array<[string, string]>) {
   });
   return result;
 }
+
 //
 // function fromEntries(array: Array<[string, string[]]>) {
 //   const result: { [key: string]: string[] } = {};
