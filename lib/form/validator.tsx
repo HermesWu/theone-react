@@ -62,9 +62,10 @@ const validator = (formValue: FormValue, rules: FormRules, callback: (errors: an
   );
   // 解决any 时，filter 接受泛型 类型守卫
   function hasError(item: [string, undefined] | [string, string]): item is [string, string]{
-    return typeof item[1] === 'object'
+    return typeof item[1] === 'string'
   }
   Promise.all(newPromiseList).then(result => {
+    console.log(zip(result.filter<[string, string]>(hasError)))
     callback(zip(result.filter<[string, string]>(hasError)));
   });
 
