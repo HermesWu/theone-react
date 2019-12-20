@@ -1,3 +1,10 @@
+/*
+* TODO:
+* 1. 支持子字段编辑
+* 2. 支持更多的type / 自定义 input
+* 3. 支持手机端
+* */
+
 import React, {ReactFragment} from 'react';
 import Input from '../Input/input';
 import {scopedClassMaker} from '../helps/classes';

@@ -10,7 +10,7 @@ const checkUserName = (username: string, succeed: () => void, fail: () => void) 
     if (usernames.indexOf(username) >= 0) {
       fail()
     } else {
-      succeed();;
+      succeed();
     }
   }, 2000);
 };
@@ -36,12 +36,16 @@ const FormExample: React.FunctionComponent = () => {
       {key: 'username', minLength: 6},
       {key: 'username', pattern: /^[A-Za-z0-9]+$/},
       {key: 'username', validator},
+      {key: 'username', validator},
+      {key: 'password', validator},
+      {key: 'password', validator},
       {key: 'password', required: true},
       {key: 'password', pattern: /^[A-Za-z0-9]+$/},
     ];
     Validator(formData, rules, (errors)=>{
       if (noError(errors)) {
         // TODO somethings
+        setErrors(errors);
       } else {
         // Errors
         setErrors(errors);
