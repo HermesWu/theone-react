@@ -14,7 +14,16 @@ const Scroll: React.FunctionComponent<Props> = (props) => {
   const {children, ...rest} = props;
 
   const [barHeight, setBarHeight] = useState(0);
-  const [barTop, setBarTop] = useState(0);
+  const [barTop, _setBarTop] = useState(0);
+  const setBarTop = (number:number) => {
+    const {current} = containerRef
+    const scrollHeight = current!.scrollHeight
+    const viewHeight = current!.getBoundingClientRect().height;
+    const maxBarTop = (scrollHeight - viewHeight) * viewHeight / scrollHeight
+    if(number < 0 || number > maxBarTop) {return}
+    _setBarTop(number)
+
+  }
   const containerRef = useRef<HTMLDivElement>(null);
 
   const onScroll: UIEventHandler = (e) => {
